@@ -6,7 +6,7 @@ This tool is made to saving space of ALPS source code space for LK.
 
 LK MTK customization waste space in logo area, as there are many logo for various size and China operator (Unicom, Telecom, Mobile).
 
-For ALPS.KK1.MP7.V1 the logo total is 6.3GB
+For ALPS.KK1.MP7.V1.7 the logo total is 6.3GB
 
 ![](before_compress.png)
 
