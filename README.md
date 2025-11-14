@@ -177,12 +177,12 @@ $(BOOT_LOGO_RESOURCE): $(addprefix $(BUILDDIR)/,$(RESOURCE_OBJ_LIST)) $(ZPIPE)
 # 	@echo "Compiling_BMP_TO_RAW $<"
 # 	$(BMP_TO_RAW) $@ $<
 
-$(BUILDDIR)/%.raw: %.bmc $(BMP_TO_RAW) $(BMC_DECOMPRESS)
+$(BUILDDIR)/%.raw: %.bmc $(BMP_TO_RAW) $(BMC_TO_BMP)
 	@$(MKDIR)
 	$(NOECHO) if [ ! -x $(BMP_TO_RAW) ]; then chmod a+x $(BMP_TO_RAW); fi
-	$(NOECHO) if [ ! -x $(BMC_DECOMPRESS) ]; then chmod a+x $(BMC_DECOMPRESS); fi
+	$(NOECHO) if [ ! -x $(BMC_TO_BMP) ]; then chmod a+x $(BMC_TO_BMP); fi
 	@echo "Decompressing BMC $<"
-	$(BMC_DECOMPRESS) $< $*.bmp
+	$(BMC_TO_BMP) $< $*.bmp
 	@echo "Converting BMP to RAW $*.bmp"
 	$(BMP_TO_RAW) $@ $*.bmp
 	@echo "Cleaning up temporary BMP"
