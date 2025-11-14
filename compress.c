@@ -121,7 +121,10 @@ static int read_bmp_file(const char *filename, unsigned char **data, size_t *siz
     return 0;
 }
 
-static int write_lzo_file(const char *filename, const unsigned char *data, size_t size) {
+//wz 20251115 do not trust bisizeimage
+//static int write_lzo_file(const char *filename, const unsigned char *data, size_t size) {
+static int write_lzo_file(const char *filename, const unsigned char *data, size_t size, size_t osize) {
+//wz 20251115 do not trust bisizeimage
     FILE *fp;
     
     fp = fopen(filename, "wb");
@@ -132,8 +135,12 @@ static int write_lzo_file(const char *filename, const unsigned char *data, size_
 	
 	//change magic
 	fileHeader.bfType = 'CB';
-	fileHeader.bfReserved1 = infoHeader.biSizeImage&0xffff;
-	fileHeader.bfReserved2 = infoHeader.biSizeImage>>16;
+//wz 20251115 do not trust bisizeimage
+	//fileHeader.bfReserved1 = infoHeader.biSizeImage&0xffff;
+	//fileHeader.bfReserved2 = infoHeader.biSizeImage>>16;
+	fileHeader.bfReserved1 = osize&0xffff;
+	fileHeader.bfReserved2 = osize>>16;
+//wz 20251115 do not trust bisizeimage
 	infoHeader.biSizeImage = size;
     
 	if (fwrite(&fileHeader, 1, sizeof(BITMAPFILEHEADER), fp) != sizeof(BITMAPFILEHEADER)) {
@@ -202,7 +209,10 @@ int main(int argc, char *argv[]) {
            (unsigned long)output_size, 
            (output_size * 100.0) / input_size);
     
-    if (write_lzo_file(argv[2], output_data, output_size) != 0) {
+//wz 20251115 do not trust bisizeimage
+//    if (write_lzo_file(argv[2], output_data, output_size) != 0) {
+    if (write_lzo_file(argv[2], output_data, output_size, input_size) != 0) {
+//wz 20251115 do not trust bisizeimage
         free(input_data);
         free(output_data);
         return 1;

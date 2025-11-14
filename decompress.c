@@ -119,7 +119,9 @@ static int read_bmc_file(const char *filename, unsigned char **data, size_t *siz
 	
 	if ((fileHeader.bfReserved1|(fileHeader.bfReserved2<<16)) == 0)
 	{
-		fprintf(stderr, "fail bmp indata is null\n");
+//wz 20251115 debugging
+		fprintf(stderr, "fail bmp indata is null -----> origianl file is %s\n", filename);
+//wz 20251115 debugging
         free(*data);
         fclose(fp);
         return -1;

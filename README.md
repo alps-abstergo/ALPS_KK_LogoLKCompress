@@ -26,7 +26,7 @@ Explain: compress raw data of BMP to LZO -> Delete all BMP
 
 Decompress:
 ```
-gcc -o bmc_to_bmp compress.c minilzo.c
+gcc -o bmc_to_bmp decompress.c minilzo.c
 <Copy the bmc_to_bmp to mediatek/custom/common/lk/logo_tool>
 ```
 
